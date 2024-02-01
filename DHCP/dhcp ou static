@@ -1,0 +1,10 @@
+source /etc/network/interface.d/*
+
+        auto lo
+		iface lo inet loopback
+        allow-hotplug ens33
+		iface ensp33 inet static
+		address 192.168.0.111
+		netmask 255.255.255.0
+        #gateway 192.168.0.1
+		 
