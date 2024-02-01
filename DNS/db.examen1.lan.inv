@@ -1,0 +1,17 @@
+$TTL 3600
+@ IN SOA Serv1.examen1.lan. root.examen1.lan. (
+#   Serveur Nom.domaine     root.domaine.....
+
+2021113001
+3600
+600
+86400
+600 )
+;
+
+# ip to look for with name of machine 
+@  IN NS Serv1.examen1.lan.
+12  IN PTR Win1.examen1.lan.
+11  IN PTR Serv2.examen1.lan.
+1  IN PTR Serv1.examen1.lan.
+

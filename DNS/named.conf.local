@@ -1,0 +1,22 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+include "/etc/bind/zones.rfc1918";
+
+zone "examen1.lan" IN {     #ici domaine name a changer
+type master;
+file "/var/lib/bind/db.examen1.lan";
+forwarders {};
+allow-update {none;};
+};
+
+zone "10.168.192.in-addr.arpa" IN {    #ip reverse a changer
+type master;
+file "/var/lib/bind/db.examen1.lan.inv"; #domaine a changer 
+forwarders {};
+allow-update {none; };
+};
+

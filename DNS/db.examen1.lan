@@ -1,0 +1,18 @@
+$TTL 3600
+@ IN SOA Serv1.examen1.lan. root.examen1.lan. (
+#   Serveur Nom.domaine     root.domaine.....
+2021113001
+3600
+600
+86400
+600 )
+;
+@  IN NS Serv1.examen1.lan.
+dns IN CNAME Serv1      #server name
+
+# serveur ip
+Serv1 IN A 192.168.10.1 
+
+# autre machine ip
+Serv2 IN A 192.168.10.11
+

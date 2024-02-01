@@ -1,0 +1,74 @@
+
+#install dhcp serveur
+apt install isc-dhcp-server
+
+vi /etc/default/isc-dhcp-server
+    On décommente :
+
+            DHCPDv4_CONF=/etc/dhcp/dhcpd.conf
+
+    Et un peu plus bas, on spécifie les interfaces d'écoute.
+
+            Copier vers le presse-papierCode TEXT :
+            INTERFACESv4="enp23s0"
+            INTERFACESv6="enp23s0
+
+Lancement et configuration du service
+
+        Une fois la config terminée, on lance notre DHCP:
+
+            Copier vers le presse-papierCode BASH :
+
+                    systemctl start isc-dhcp-server
+
+#Et on ajoute le service au démarrage :
+
+                Copier vers le presse-papierCode BASH :
+
+                            systemctl enable isc-dhcp-server
+
+
+
+/etc/dhcp/dhcpd.conf:
+
+        default-lease-time 86400; # Bail de 24H
+        max-lease-time 172800; # Bail maxi de 48H
+        # Déclaration d'un réseau
+        subnet 192.168.1.0 netmask 255.255.255.0 {
+                range                           192.168.1.100 192.168.1.199; # Plage IP
+                option domain-name-servers      192.168.1.11; # DNS
+                option routers                  192.168.1.1; # Passerelle
+        }
+
+
+#Réserver une adresse IP dans la plage:
+
+
+        # Plage DHCP
+subnet 10.21.27.0 netmask 255.255.255.0 {
+        range                           10.21.27.100 10.21.27.199;
+        option domain-name-servers      10.21.27.253;
+        option routers                  10.21.27.254;
+        # Réservations DHCP
+        host superlinux-eth {
+                hardware ethernet 10:bf:48:13:f6:cc;
+                fixed-address 10.21.27.100;
+        }
+        host superlinux-wlan {
+                hardware ethernet 68:5d:43:2a:f3:af;
+                fixed-address 10.21.27.101;
+        }
+}
+
+
+#Refuser un hôte:
+
+
+host banni {
+      hardware ethernet 00:00:00:00:00;
+      deny booting;
+}
+
+
+
+https://www.linuxtricks.fr/wiki/dhcp-sous-linux-le-fichier-de-configuration-dhcpd-conf
