@@ -1,5 +1,5 @@
 # CR-Linux Files Setuo
 
-[] DNS
-[] DHCP
-[]
+[ ] DNS
+[ ] DHCP
+[ ] FTP
